@@ -64,7 +64,7 @@ defmodule Goth.Config do
   defp load_and_init({false, app_config}) do
     config =
       from_json(app_config) || from_config(app_config) || from_creds_file(app_config) ||
-        from_gcloud_adc(app_config) || from_metadata(app_config)
+        from_gcloud_adc(app_config) || from_metadata(app_config) |> IO.inspect
 
     config =
       config
@@ -81,6 +81,7 @@ defmodule Goth.Config do
         }
       end)
       |> Enum.into(%{})
+      |> IO.inspect
 
     {:ok, config}
   end
